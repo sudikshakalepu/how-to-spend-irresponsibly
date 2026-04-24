@@ -1,9 +1,5 @@
-/* ═══════════════════════════════════════════════════════
-   FINANCIAL RUIN ACADEMY — App Logic
-   ═══════════════════════════════════════════════════════ */
 
-// ─── Data ───────────────────────────────────────────────
-
+//    Data
 const VIDEOS = {
   1: 'https://www.youtube.com/embed/WsgtLSrddvE?si=KTLLqPWfFGYksM4E',
   2: 'https://www.youtube.com/embed/WoPmi0c-c3I?si=ex6M5uHHyAwDkMuA&enablejsapi=1&rel=0',
@@ -58,7 +54,7 @@ const QUIZ = [
   },
 ];
 
-// ─── State ──────────────────────────────────────────────
+//    State
 
 const S = {
   current:    0,
@@ -77,7 +73,7 @@ const S = {
   pymkDone:   {},
 };
 
-// ─── Section heights set by JS ───────────────────────────
+//    Section heights set by JS
 
 function setSectionHeight() {
   const container = document.getElementById('feed-container');
@@ -86,7 +82,7 @@ function setSectionHeight() {
   document.documentElement.style.setProperty('--section-h', h + 'px');
 }
 
-// ─── Navigation ─────────────────────────────────────────
+//    Navigation                           
 
 let isSnapping = false;
 
@@ -113,7 +109,7 @@ function goToSection(n, force) {
   setTimeout(() => { isSnapping = false; }, 720);
 }
 
-// ─── YouTube postMessage API ────────────────────────────
+//    YouTube postMessage API                   
 
 function ytCmd(step, func, args) {
   const iframe = document.getElementById('yt-iframe-' + step);
@@ -177,7 +173,7 @@ function updateDots() {
   document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
 }
 
-// ─── Scroll interception ─────────────────────────────────
+//    Scroll interception                       
 
 function initScroll() {
   const fc = document.getElementById('feed-container');
@@ -223,8 +219,7 @@ function initScroll() {
   });
 }
 
-// ─── Toast ───────────────────────────────────────────────
-
+//    Toast  
 let _tid = 0;
 function toast(title, body, type) {
   const c = document.getElementById('toast-container');
@@ -239,7 +234,7 @@ function toast(title, body, type) {
   }, 3500);
 }
 
-// ─── Confetti ────────────────────────────────────────────
+//    Confetti                             
 
 function celebrate() {
   const cols = { colors: ['#0a66c2','#004182','#0073b1','#e8f0fe','#ffffff'] };
@@ -250,7 +245,7 @@ function celebrate() {
   }, 300);
 }
 
-// ─── Sidebar health ──────────────────────────────────────
+//    Sidebar health                         
 
 function damageHealth(n) {
   S.health = Math.max(0, S.health - n);
@@ -269,7 +264,7 @@ function damageHealth(n) {
   if (badge) badge.textContent = S.notifCount;
 }
 
-// ─── Nav click handlers ──────────────────────────────────
+//    Nav click handlers                      
 
 function navClick(id) {
   const msgs = {
@@ -284,7 +279,7 @@ function navClick(id) {
   toast(m[0], m[1]);
 }
 
-// ─── Post helpers ─────────────────────────────────────────
+//    Post helpers                           
 
 function postHeaderHTML(name, hl, time, badge) {
   return `
@@ -372,10 +367,8 @@ function cmtHTML(av, name, text, extra) {
   </div>`;
 }
 
-// ═══════════════════════════════════════════════════════
-// SECTION 0 — INTRO
-// ═══════════════════════════════════════════════════════
-
+ // SECTION 0 — INTRO
+ 
 function renderS0() {
   document.getElementById('section-0').innerHTML = `
     <div class="post-card">
@@ -420,10 +413,8 @@ function renderS0() {
   `;
 }
 
-// ═══════════════════════════════════════════════════════
-// SECTION 1 — IMPULSE BUY
-// ═══════════════════════════════════════════════════════
-
+ // SECTION 1 — IMPULSE BUY
+ 
 function renderS1() {
   const carted = ITEMS.filter(i => S.reactions[i.id] === '🛒').length;
   document.getElementById('section-1').innerHTML = `
@@ -447,8 +438,7 @@ function renderS1() {
   `;
 }
 
-// ─── Modal ───────────────────────────────────────────────
-
+//    Modal  
 function openListingsModal() {
   pauseAllVideos();
   const inner = document.getElementById('modal-inner');
@@ -591,10 +581,8 @@ function checkS1() {
   }
 }
 
-// ═══════════════════════════════════════════════════════
-// SECTION 2 — SAVINGS POLL
-// ═══════════════════════════════════════════════════════
-
+ // SECTION 2 — SAVINGS POLL
+ 
 function renderS2() {
   const spends = S.pollVotes.filter(i => POLL_OPTS[i].type === 'spend').length;
   document.getElementById('section-2').innerHTML = `
@@ -753,10 +741,8 @@ function checkS2() {
   }
 }
 
-// ═══════════════════════════════════════════════════════
-// SECTION 3 — QUIZ
-// ═══════════════════════════════════════════════════════
-
+ // SECTION 3 — QUIZ
+ 
 function renderS3() {
   document.getElementById('section-3').innerHTML = `
     <div class="post-card">
@@ -911,10 +897,8 @@ function checkS3() {
   }
 }
 
-// ═══════════════════════════════════════════════════════
-// SECTION 4 — FINALE
-// ═══════════════════════════════════════════════════════
-
+ // SECTION 4 — FINALE
+ 
 function renderS4() {
   const rank = S.health < 25 ? 'Financially Obliterated'
              : S.health < 45 ? 'Professionally Broke'
@@ -1005,10 +989,8 @@ function resetAll() {
   goToSection(0, true);
 }
 
-// ═══════════════════════════════════════════════════════
-// SIDEBARS
-// ═══════════════════════════════════════════════════════
-
+ // SIDEBARS
+ 
 function renderLeft() {
   document.getElementById('left-sidebar').innerHTML = `
     <div class="li-card" style="overflow:visible;">
@@ -1103,10 +1085,8 @@ function pymkClick(i, name, type) {
   toast(type === 'Connect' ? `Connected with ${name}` : `Following ${name}`, 'They have been notified. They seem surprised.', 'ok');
 }
 
-// ═══════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════
-
+ // INIT
+ 
 function renderAll() {
   renderLeft();
   renderRight();
