@@ -1,6 +1,4 @@
-/* ═══════════════════════════════════════════════════
-   FINANCIAL RUIN ACADEMY — LinkedIn Light Clone
-   ═══════════════════════════════════════════════════ */
+/* FINANCIAL RUIN ACADEMY — LinkedIn Light Clone */
 
 :root {
   --blue:       #0a66c2;
@@ -21,7 +19,7 @@
   --animate-duration: 0.35s;
 }
 
-/* ─── Reset ─── */
+/*    Reset    */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
@@ -44,7 +42,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 button:disabled { cursor: not-allowed; opacity: 0.45; }
 input  { font-family: var(--font); }
 
-/* ═══ NAV ═══ */
+/*   NAV   */
 
 #nav {
   position: fixed;
@@ -133,7 +131,7 @@ input  { font-family: var(--font); }
   line-height: 1;
 }
 
-/* ═══ APP LAYOUT ═══ */
+/*   APP LAYOUT   */
 
 #app {
   position: fixed;
@@ -148,7 +146,7 @@ input  { font-family: var(--font); }
   overflow: hidden;
 }
 
-/* ─── Left sidebar ─── */
+/*    Left sidebar    */
 
 #left-sidebar {
   width: 220px;
@@ -163,7 +161,7 @@ input  { font-family: var(--font); }
 #left-sidebar::-webkit-scrollbar { width: 3px; }
 #left-sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
 
-/* ─── Feed wrap ─── */
+/*    Feed wrap    */
 
 #feed-wrap {
   width: 554px;
@@ -203,7 +201,7 @@ input  { font-family: var(--font); }
 .section::-webkit-scrollbar { width: 3px; }
 .section::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
 
-/* ─── Dots ─── */
+/*    Dots    */
 
 #section-dots {
   flex-shrink: 0;
@@ -226,7 +224,7 @@ input  { font-family: var(--font); }
 .dot.locked  { background: rgba(0,0,0,0.08); cursor: not-allowed; }
 .dot:hover:not(.locked) { background: var(--blue); opacity: 0.7; }
 
-/* ─── Right sidebar ─── */
+/*    Right sidebar    */
 
 #right-sidebar {
   width: 295px;
@@ -241,7 +239,7 @@ input  { font-family: var(--font); }
 #right-sidebar::-webkit-scrollbar { width: 3px; }
 #right-sidebar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.12); border-radius: 2px; }
 
-/* ═══ CARDS ═══ */
+/*   CARDS   */
 
 .li-card {
   background: var(--white);
@@ -249,7 +247,7 @@ input  { font-family: var(--font); }
   box-shadow: var(--shadow);
 }
 
-/* ═══ LEFT SIDEBAR CONTENT ═══ */
+/*   LEFT SIDEBAR CONTENT   */
 
 .profile-banner {
   height: 52px;
@@ -323,7 +321,7 @@ input  { font-family: var(--font); }
 
 .sidebar-link:hover { background: var(--bg); color: var(--text); }
 
-/* ═══ RIGHT SIDEBAR CONTENT ═══ */
+/*   RIGHT SIDEBAR CONTENT   */
 
 .pymk-title { font-size: 14px; font-weight: 600; padding: 12px 12px 8px; }
 
@@ -370,7 +368,7 @@ input  { font-family: var(--font); }
   line-height: 2; padding: 12px;
 }
 
-/* ═══ POST CARD ═══ */
+/*   POST CARD   */
 
 .post-card {
   background: var(--white);
@@ -434,7 +432,7 @@ input  { font-family: var(--font); }
   border: none; display: block;
 }
 
-/* ─── Modal ─── */
+/*    Modal    */
 
 #modal-overlay {
   position: fixed;
@@ -615,7 +613,7 @@ input  { font-family: var(--font); }
 .cmt-actions span { cursor: pointer; }
 .cmt-actions span:hover { color: var(--text); text-decoration: underline; }
 
-/* ═══ STEP 1 — LISTING CARDS ═══ */
+/*   STEP 1 — LISTING CARDS   */
 
 .activity-card {
   background: var(--white);
@@ -685,7 +683,7 @@ input  { font-family: var(--font); }
   display: flex; align-items: center; gap: 3px;
 }
 
-/* ─── Reaction popup ─── */
+/*    Reaction popup    */
 
 #reaction-popup {
   position: fixed;
@@ -713,7 +711,7 @@ input  { font-family: var(--font); }
 .r-cart  { border: 1.5px solid var(--blue); border-radius: 10px; }
 .r-cart .r-label { color: var(--blue); }
 
-/* ═══ STEP 2 — POLL ═══ */
+/*   STEP 2 — POLL   */
 
 .poll-wrap { padding: 14px; }
 .poll-q    { font-size: 14px; font-weight: 600; margin-bottom: 3px; }
@@ -762,7 +760,7 @@ input  { font-family: var(--font); }
 
 .poll-footer strong { color: var(--text); }
 
-/* ═══ STEP 3 — QUIZ ═══ */
+/*   STEP 3 — QUIZ   */
 
 .quiz-wrap { padding: 14px; display: flex; flex-direction: column; gap: 12px; }
 
@@ -842,7 +840,7 @@ input  { font-family: var(--font); }
 
 .quiz-alice-cmt .cmt { padding: 0; }
 
-/* ═══ COMPLETION BANNER ═══ */
+/*   COMPLETION BANNER   */
 
 .completion-banner {
   background: linear-gradient(135deg, #057642, #04a056);
@@ -868,7 +866,7 @@ input  { font-family: var(--font); }
 
 .btn-white:hover { background: var(--blue-bg); }
 
-/* ─── scroll hint ─── */
+/*    scroll hint    */
 
 .scroll-hint {
   display: flex; flex-direction: column; align-items: center;
@@ -892,7 +890,7 @@ input  { font-family: var(--font); }
 .scroll-hint.locked .scroll-arr { color: var(--faint); cursor: not-allowed; }
 .scroll-hint.locked:hover .scroll-arr { background: white; transform: none; }
 
-/* ─── CTA buttons ─── */
+/*    CTA buttons    */
 
 .btn-li-primary {
   background: var(--blue); color: white;
@@ -912,7 +910,7 @@ input  { font-family: var(--font); }
 
 .btn-li-outline:hover { background: var(--blue-bg); }
 
-/* ═══ FINALE ═══ */
+/*   FINALE   */
 
 .cert-card { overflow: hidden; }
 
@@ -989,7 +987,7 @@ input  { font-family: var(--font); }
   font-size: 12px; font-weight: 700;
 }
 
-/* ═══ TOASTS ═══ */
+/*   TOASTS   */
 
 #toast-container {
   position: fixed;
@@ -1018,7 +1016,7 @@ input  { font-family: var(--font); }
 .toast-title { font-size: 12px; font-weight: 700; margin-bottom: 1px; }
 .toast-body  { font-size: 11px; color: var(--muted); line-height: 1.4; }
 
-/* ═══ RESPONSIVE ═══ */
+/*   RESPONSIVE   */
 
 @media (max-width: 1100px) {
   #right-sidebar { display: none; }
@@ -1035,7 +1033,7 @@ input  { font-family: var(--font); }
   #nav .nav-links { gap: 0; }
 }
 
-/* ─── Keyframes ─── */
+/*    Keyframes    */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
