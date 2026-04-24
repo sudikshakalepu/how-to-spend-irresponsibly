@@ -5,7 +5,7 @@
 // ─── Data ───────────────────────────────────────────────
 
 const VIDEOS = {
-  1: 'https://youtu.be/WsgtLSrddvE?si=1BRgWW-YY7Aei1TU',
+  1: 'https://www.youtube.com/embed/WsgtLSrddvE?si=KTLLqPWfFGYksM4E',
   2: 'https://www.youtube.com/embed/WoPmi0c-c3I?si=ex6M5uHHyAwDkMuA&enablejsapi=1&rel=0',
   3: 'https://www.youtube.com/embed/Y8U6SRIhvsg?si=F4NbDNDU_HMyNFIP&enablejsapi=1&rel=0',
 };
