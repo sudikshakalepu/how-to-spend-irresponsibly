@@ -444,14 +444,6 @@ function renderS1() {
         <span class="cart-count" id="s1-cart-count">${carted}/3 carted</span>
       </button>
     </div>
-
-    <div id="s1-done" class="${S.step1Done ? '' : 'hidden'} completion-banner">
-      <div class="icon">🛒</div>
-      <div><h3>Step 1 Complete — Cart secured.</h3><p>Three irresponsible purchases confirmed. Step 2 unlocked.</p></div>
-      <button class="btn-white" onclick="goToSection(2)">Next →</button>
-    </div>
-
-    <div id="s1-hint">${scrollHintHTML(!S.step1Done, 2)}</div>
   `;
 }
 
@@ -590,15 +582,11 @@ function checkS1() {
     }
     setTimeout(() => {
       closeModal();
-      // Update section
-      const done = document.getElementById('s1-done');
-      const hint = document.getElementById('s1-hint');
-      if (done) done.classList.remove('hidden');
-      if (hint) hint.innerHTML = scrollHintHTML(false, 2);
       updateDots();
       celebrate();
-      toast('🛒 Step 1 Complete!', 'All three items carted. Step 2 unlocked.', 'ok');
+      toast('🛒 Step 1 Complete!', 'All three items carted. Heading to Step 2.', 'ok');
       damageHealth(5);
+      setTimeout(() => goToSection(2), 1200);
     }, 900);
   }
 }
@@ -613,7 +601,8 @@ function renderS2() {
     <div class="post-card">
       ${postHeaderHTML('Alice Chen','Certified Financial Disaster Coach · Financial Ruin Academy','2h')}
       <div class="post-body">
-        Your savings account is emotionally unavailable and you deserve better. Every dollar in savings is a dollar not out experiencing things.  💸<br><br>
+        Your savings account is emotionally unavailable and you deserve better. Unpopular opinion but I will die on this hill 💸<br><br>
+        Every dollar in savings is a dollar not out experiencing things. Getting 2%? You've lost the game.<br><br>
         <span class="ht">#FinancialFreedom</span> <span class="ht">#SavingsAreFear</span> <span class="ht">#UnpopularOpinion</span>
       </div>
       ${videoHTML(2)}
@@ -627,14 +616,6 @@ function renderS2() {
         <span class="cart-count" id="s2-spend-count">${spends}/3 choices made</span>
       </button>
     </div>
-
-    <div id="s2-done" class="${S.step2Done ? '' : 'hidden'} completion-banner">
-      <div class="icon">💸</div>
-      <div><h3>Step 2 Complete — Savings: $0.</h3><p>All three spending choices confirmed. Step 3 unlocked.</p></div>
-      <button class="btn-white" onclick="goToSection(3)">Next →</button>
-    </div>
-
-    <div id="s2-hint">${scrollHintHTML(!S.step2Done, 3)}</div>
   `;
 }
 
@@ -764,14 +745,11 @@ function checkS2() {
     }
     setTimeout(() => {
       closeModal();
-      const done = document.getElementById('s2-done');
-      const hint = document.getElementById('s2-hint');
-      if (done) done.classList.remove('hidden');
-      if (hint) hint.innerHTML = scrollHintHTML(false, 3);
       updateDots();
       celebrate();
-      toast('💸 Step 2 Complete!', 'Savings: $0. Step 3 unlocked.', 'ok');
+      toast('💸 Step 2 Complete!', 'Savings: $0. Heading to Step 3.', 'ok');
       damageHealth(5);
+      setTimeout(() => goToSection(3), 1200);
     }, 900);
   }
 }
@@ -785,8 +763,8 @@ function renderS3() {
     <div class="post-card">
       ${postHeaderHTML('Alice Chen','Certified Financial Disaster Coach · Financial Ruin Academy','1h')}
       <div class="post-body">
-        Stop asking "is this a good investment." Start asking "does this feel right." <br>
-        Traditional advice: diversify, think long term, don't put rent money into crypto at 2am. Boring. All of it. What speaks to you? What has good energy?<br>
+        Stop asking "is this a good investment." Start asking "does this feel right." Thread 🧵<br><br>
+        Traditional advice: diversify, think long term, don't put rent money into crypto at 2am. Boring. All of it. What speaks to you? What has good energy?<br><br>
         <span class="ht">#Crypto</span> <span class="ht">#MOONCOIN</span> <span class="ht">#InvestWithVibes</span>
       </div>
       ${videoHTML(3)}
@@ -800,14 +778,6 @@ function renderS3() {
         <span class="cart-count" id="s3-quiz-count">${S.quizDone.length}/3 answered</span>
       </button>
     </div>
-
-    <div id="s3-done" class="${S.step3Done ? '' : 'hidden'} completion-banner">
-      <div class="icon">📉</div>
-      <div><h3>Step 3 Complete — Investment philosophy established.</h3><p>Alice is proud. Your bank is not. Certificate awaits.</p></div>
-      <button class="btn-white" onclick="goToSection(4)">Get Certificate →</button>
-    </div>
-
-    <div id="s3-hint">${scrollHintHTML(!S.step3Done, 4)}</div>
   `;
 }
 
@@ -933,14 +903,11 @@ function checkS3() {
     }
     setTimeout(() => {
       closeModal();
-      const done = document.getElementById('s3-done');
-      const hint = document.getElementById('s3-hint');
-      if (done) done.classList.remove('hidden');
-      if (hint) hint.innerHTML = scrollHintHTML(false, 4);
       updateDots();
       celebrate();
-      toast('📉 Step 3 Complete!', 'Alice is proud. Certificate unlocked.', 'ok');
+      toast('📉 Step 3 Complete!', 'Alice is proud. Your certificate awaits.', 'ok');
       damageHealth(5);
+      setTimeout(() => goToSection(4), 1200);
     }, 900);
   }
 }
