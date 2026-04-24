@@ -601,9 +601,8 @@ function renderS2() {
     <div class="post-card">
       ${postHeaderHTML('Alice Chen','Certified Financial Disaster Coach · Financial Ruin Academy','2h')}
       <div class="post-body">
-        Your savings account is emotionally unavailable and you deserve better. Unpopular opinion but I will die on this hill 💸<br><br>
-        Every dollar in savings is a dollar not out experiencing things. Getting 2%? You've lost the game.<br><br>
-        <span class="ht">#FinancialFreedom</span> <span class="ht">#SavingsAreFear</span> <span class="ht">#UnpopularOpinion</span>
+        Your savings account is emotionally unavailable and you deserve better. Every dollar in savings is a dollar not out experiencing things. Getting 2%? You've lost the game. 💸<br><br>
+        <span class="ht">#FinancialFreedom</span> <span class="ht">#SavingsAreFear</span>
       </div>
       ${videoHTML(2)}
       ${postActionsHTML('s2')}
@@ -927,20 +926,16 @@ function renderS4() {
   document.getElementById('section-4').innerHTML = `
     <div class="post-card">
       ${postHeaderHTML('Alice Chen','Certified Financial Disaster Coach · Financial Ruin Academy','Just now','🎓 New')}
-      <div class="post-body">
-        Thrilled to announce I've officially completed my financial education curriculum 🎓<br><br>
-        It's been a journey. My portfolio is down 62% and I've never felt more alive. I learned so much —
-        primarily that an emergency fund is just fear with a savings account.<br><br>
-        Open to new opportunities. DMs open. Fondue set also available (slightly used).<br><br>
+      <div class="post-body" style="padding-bottom:6px;">
+        Thrilled to announce I've officially completed my financial education curriculum 🎓 My portfolio is down 62% and I've never felt more alive. Open to new opportunities. Fondue set also available.<br>
         <span class="ht">#Blessed</span> <span class="ht">#OpenToWork</span> <span class="ht">#NeverFeltMoreAlive</span>
       </div>
-      ${postActionsHTML('s4')}
     </div>
 
     <div class="li-card cert-card">
       <div class="cert-top-bar"></div>
-      <div class="cert-body">
-        <div class="cert-issuer">
+      <div class="cert-body" style="padding:14px 16px 12px;">
+        <div class="cert-issuer" style="margin-bottom:10px;">
           <div class="cert-issuer-logo">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452z"/></svg>
           </div>
@@ -949,15 +944,14 @@ function renderS4() {
             <div class="cert-issuer-sub">Issued via Linked Out Learning (not really)</div>
           </div>
         </div>
-        <div class="cert-title">Certificate of Financial Ruin</div>
-        <div class="cert-rank">${rank}</div>
-        <div class="cert-meta">
-          <div class="cert-meta-item"><strong>Issued ${today}</strong><span>Completion date</span></div>
-          <div class="cert-meta-item"><strong>Credential ID</strong><span>${ordNum}</span></div>
-          <div class="cert-meta-item"><strong>${S.health}%</strong><span>Financial health remaining</span></div>
+        <div class="cert-title" style="font-size:17px;margin-bottom:2px;">Certificate of Financial Ruin</div>
+        <div class="cert-rank" style="margin-bottom:10px;">${rank}</div>
+        <div class="cert-meta" style="margin-bottom:8px;gap:14px;">
+          <div class="cert-meta-item"><strong>Issued ${today}</strong><span>Date</span></div>
+          <div class="cert-meta-item"><strong>${ordNum}</strong><span>Credential ID</span></div>
+          <div class="cert-meta-item"><strong>${S.health}%</strong><span>Health remaining</span></div>
         </div>
-        <div class="cert-id">This credential is issued by Financial Ruin Academy and verifies that the holder has completed all three lessons in being irresponsible with money. No actual financial advice was given or received. Please do not do any of this.</div>
-        <div class="cert-cta">
+        <div class="cert-cta" style="margin-top:10px;">
           <button class="btn-cert" onclick="shareCert()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
             Share on LinkedIn
@@ -970,15 +964,15 @@ function renderS4() {
       </div>
     </div>
 
-    <div class="li-card skills-card">
-      <div class="skills-title">Skills &amp; Endorsements</div>
+    <div class="li-card skills-card" style="padding:12px 16px;">
+      <div class="skills-title" style="margin-bottom:8px;">Skills &amp; Endorsements</div>
       ${[
         ['Impulse Buying','Endorsed by 847 connections','847'],
         ['Savings Destruction','Endorsed by 1,203 connections','1,203'],
         ['Crypto Intuition','Endorsed by 312 connections','312'],
         ['Buy High, Sell Low','Endorsed by Alice Chen','1'],
       ].map(([n,e,b]) => `
-        <div class="skill-row">
+        <div class="skill-row" style="padding:5px 0;">
           <div><div class="skill-name">${n}</div><div class="skill-end">${e}</div></div>
           <div class="skill-badge">${b}</div>
         </div>
