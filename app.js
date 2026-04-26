@@ -1,9 +1,9 @@
-// financial ruin academy app logic
+// financial ruin academy — app logic
 
 const VIDEOS = {
   1: 'https://www.youtube.com/embed/oLAZdgBXj5A?si=QOWMTWcDWwM2ujQM&enablejsapi=1&rel=0',
   2: 'https://www.youtube.com/embed/WoPmi0c-c3I?si=ex6M5uHHyAwDkMuA&enablejsapi=1&rel=0',
-  3: 'https://www.youtube.com/embed/Cjkb4rXgnhI?si=Ep1jULRwaKjC3Hx1&enablejsapi=1&rel=0',
+  3: 'https://www.youtube.com/embed/Y8U6SRIhvsg?si=F4NbDNDU_HMyNFIP&enablejsapi=1&rel=0',
 };
 
 const ITEMS = [
@@ -48,7 +48,7 @@ const QUIZ = [
     opts: [
       { text: 'Cut losses. Move the $100 into something stable.',                        right: false, fb: '"Sell the dip AND miss the recovery. Two mistakes. Impressive." — Sam 😐' },
       { text: 'Sell and rotate into SafeRug 🪬 — up 900% this month.',                    right: true,  fb: '"Correct 🚀 Sell low, buy high on a different coin. Portfolio rotation." — Alice' },
-      { text: 'HOLD. It has to come back eventually.',                                   right: false, fb: '"Has to." That\'s not how markets work but I appreciate the optimism." — Sam 😐' },
+      { text: 'HODL. It has to come back eventually.',                                   right: false, fb: '"Has to." That\'s not how markets work but I appreciate the optimism." — Sam 😐' },
     ],
     quote: '"The best time to buy is when it\'s up. The second best: when it\'s down. No bad time." — Alice',
   },
@@ -893,14 +893,6 @@ function renderS4() {
   const today  = new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'});
 
   document.getElementById('section-4').innerHTML = `
-    <div class="post-card">
-      ${postHeaderHTML('Alice Chen','Certified Financial Disaster Coach · Financial Ruin Academy','Just now','🎓 New')}
-      <div class="post-body" style="padding-bottom:6px;">
-        Thrilled to announce I've officially completed my financial education curriculum 🎓 My portfolio is down 62% and I've never felt more alive. Open to new opportunities. Fondue set also available.<br>
-        <span class="ht">#Blessed</span> <span class="ht">#OpenToWork</span> <span class="ht">#NeverFeltMoreAlive</span>
-      </div>
-    </div>
-
     <div class="li-card cert-card">
       <div class="cert-top-bar"></div>
       <div class="cert-body" style="padding:14px 16px 12px;">
