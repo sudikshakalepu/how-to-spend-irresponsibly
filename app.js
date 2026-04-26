@@ -1,7 +1,7 @@
+// financial ruin academy app logic
 
-//    Data
 const VIDEOS = {
-  1: 'https://www.youtube.com/embed/WsgtLSrddvE?si=KTLLqPWfFGYksM4E&enablejsapi=1&rel=0',
+  1: 'https://www.youtube.com/embed/oLAZdgBXj5A?si=QOWMTWcDWwM2ujQM&enablejsapi=1&rel=0',
   2: 'https://www.youtube.com/embed/WoPmi0c-c3I?si=ex6M5uHHyAwDkMuA&enablejsapi=1&rel=0',
   3: 'https://www.youtube.com/embed/Y8U6SRIhvsg?si=F4NbDNDU_HMyNFIP&enablejsapi=1&rel=0',
 };
@@ -48,13 +48,11 @@ const QUIZ = [
     opts: [
       { text: 'Cut losses. Move the $100 into something stable.',                        right: false, fb: '"Sell the dip AND miss the recovery. Two mistakes. Impressive." — Sam 😐' },
       { text: 'Sell and rotate into SafeRug 🪬 — up 900% this month.',                    right: true,  fb: '"Correct 🚀 Sell low, buy high on a different coin. Portfolio rotation." — Alice' },
-      { text: 'HODL. It has to come back eventually.',                                   right: false, fb: '"Has to." That\'s not how markets work but I appreciate the optimism." — Sam 😐' },
+      { text: 'HOLD. It has to come back eventually.',                                   right: false, fb: '"Has to." That\'s not how markets work but I appreciate the optimism." — Sam 😐' },
     ],
     quote: '"The best time to buy is when it\'s up. The second best: when it\'s down. No bad time." — Alice',
   },
 ];
-
-//    State
 
 const S = {
   current:    0,
@@ -73,16 +71,15 @@ const S = {
   pymkDone:   {},
 };
 
-//    Section heights set by JS
-
-function setSectionHeight() {
-  const container = document.getElementById('feed-container');
-  if (!container) return;
-  const h = container.clientHeight;
-  document.documentElement.style.setProperty('--section-h', h + 'px');
+function containerH() {
+  const el = document.getElementById('feed-container');
+  return el ? Math.round(el.getBoundingClientRect().height) : window.innerHeight - 52 - 36;
 }
 
-//    Navigation                           
+function setSectionHeight() {
+  const h = containerH();
+  document.documentElement.style.setProperty('--section-h', h + 'px');
+}
 
 let isSnapping = false;
 
@@ -94,7 +91,7 @@ function goToSection(n, force) {
 
   isSnapping = true;
   S.current = n;
-  const h = document.getElementById('feed-container').clientHeight;
+  const h = containerH();
   document.getElementById('feed-inner').style.transform = `translateY(-${n * h}px)`;
 
   setTimeout(() => {
@@ -102,14 +99,12 @@ function goToSection(n, force) {
     if (sec) sec.scrollTop = 0;
   }, 40);
 
-  // Start video from beginning after transition completes
+  // start video from beginning after transition completes
   startSectionVideo(n);
 
   updateDots();
   setTimeout(() => { isSnapping = false; }, 720);
 }
-
-//    YouTube postMessage API                   
 
 function ytCmd(step, func, args) {
   const iframe = document.getElementById('yt-iframe-' + step);
@@ -169,24 +164,26 @@ function updateDots() {
     else if (!canAccess(i)) d.classList.add('locked');
   });
 
-  // Update nav Home active state
+  // update nav home active state
   document.querySelectorAll('.nav-btn').forEach((b, i) => b.classList.toggle('active', i === 0));
 }
-
-//    Scroll interception                       
 
 function initScroll() {
   const fc = document.getElementById('feed-container');
   let touchY = 0;
 
+  function secAtBottom(sec) {
+    return sec.scrollTop + Math.round(sec.getBoundingClientRect().height) >= sec.scrollHeight - 4;
+  }
+  function secAtTop(sec) {
+    return sec.scrollTop <= 4;
+  }
+
   fc.addEventListener('wheel', (e) => {
     if (isSnapping) return;
     const sec = document.getElementById('section-' + S.current);
-    const atBottom = sec.scrollTop + sec.clientHeight >= sec.scrollHeight - 3;
-    const atTop    = sec.scrollTop <= 3;
-
-    if (e.deltaY > 0 && !atBottom) return;      // let section scroll normally
-    if (e.deltaY < 0 && !atTop)    return;
+    if (e.deltaY > 0 && !secAtBottom(sec)) return;
+    if (e.deltaY < 0 && !secAtTop(sec))    return;
     e.preventDefault();
     goToSection(S.current + (e.deltaY > 0 ? 1 : -1));
   }, { passive: false });
@@ -197,10 +194,8 @@ function initScroll() {
     const dy = touchY - e.changedTouches[0].clientY;
     if (Math.abs(dy) < 45) return;
     const sec = document.getElementById('section-' + S.current);
-    const atBottom = sec.scrollTop + sec.clientHeight >= sec.scrollHeight - 3;
-    const atTop    = sec.scrollTop <= 3;
-    if (dy > 0 && atBottom) goToSection(S.current + 1);
-    if (dy < 0 && atTop)    goToSection(S.current - 1);
+    if (dy > 0 && secAtBottom(sec)) goToSection(S.current + 1);
+    if (dy < 0 && secAtTop(sec))    goToSection(S.current - 1);
   }, { passive: true });
 
   document.addEventListener('keydown', (e) => {
@@ -211,7 +206,7 @@ function initScroll() {
 
   window.addEventListener('resize', () => {
     setSectionHeight();
-    const h = document.getElementById('feed-container').clientHeight;
+    const h = containerH();
     const fi = document.getElementById('feed-inner');
     fi.style.transition = 'none';
     fi.style.transform = `translateY(-${S.current * h}px)`;
@@ -219,7 +214,6 @@ function initScroll() {
   });
 }
 
-//    Toast  
 let _tid = 0;
 function toast(title, body, type) {
   const c = document.getElementById('toast-container');
@@ -234,8 +228,6 @@ function toast(title, body, type) {
   }, 3500);
 }
 
-//    Confetti                             
-
 function celebrate() {
   const cols = { colors: ['#0a66c2','#004182','#0073b1','#e8f0fe','#ffffff'] };
   confetti({ particleCount: 80, spread: 65, origin: { y: 0.6 }, ...cols });
@@ -244,8 +236,6 @@ function celebrate() {
     confetti({ particleCount: 40, angle: 120, spread: 55, origin: { x: 1 }, ...cols });
   }, 300);
 }
-
-//    Sidebar health                         
 
 function damageHealth(n) {
   S.health = Math.max(0, S.health - n);
@@ -264,8 +254,6 @@ function damageHealth(n) {
   if (badge) badge.textContent = S.notifCount;
 }
 
-//    Nav click handlers                      
-
 function navClick(id) {
   const msgs = {
     home:    ['Going home', 'Back to the feed.'],
@@ -278,8 +266,6 @@ function navClick(id) {
   const m = msgs[id] || ['LinkedIn', 'This feature is not available in the Financial Ruin Academy demo.'];
   toast(m[0], m[1]);
 }
-
-//    Post helpers                           
 
 function postHeaderHTML(name, hl, time, badge) {
   return `
@@ -367,8 +353,8 @@ function cmtHTML(av, name, text, extra) {
   </div>`;
 }
 
- // SECTION 0 — INTRO
- 
+// section 0 — intro
+
 function renderS0() {
   document.getElementById('section-0').innerHTML = `
     <div class="post-card">
@@ -413,8 +399,8 @@ function renderS0() {
   `;
 }
 
- // SECTION 1 — IMPULSE BUY
- 
+// section 1 — impulse buy
+
 function renderS1() {
   const carted = ITEMS.filter(i => S.reactions[i.id] === '🛒').length;
   document.getElementById('section-1').innerHTML = `
@@ -438,7 +424,6 @@ function renderS1() {
   `;
 }
 
-//    Modal  
 function openListingsModal() {
   pauseAllVideos();
   const inner = document.getElementById('modal-inner');
@@ -516,7 +501,7 @@ function pickReaction(r) {
   S.activeItem = null;
   S.reactions[id] = r;
 
-  // Update right area in modal
+  // update right area in modal
   const right = document.getElementById('lr-right-' + id);
   if (right) {
     right.innerHTML = r === '🛒'
@@ -524,7 +509,7 @@ function pickReaction(r) {
       : `<button class="react-btn reacted" onclick="openReact(${id}, this)">${r} <span>${r}</span></button>`;
   }
 
-  // Alice comment in modal
+  // alice comment in modal
   const zone = document.getElementById('modal-comments');
   if (zone) {
     const txt = r === '🛒'
@@ -542,7 +527,7 @@ function pickReaction(r) {
     else toast(`${r} Noted`, 'But seriously, have you tried 🛒?');
   }
 
-  // Refresh modal sub-header count
+  // refresh modal sub-header count
   const sub = document.querySelector('.modal-sub');
   if (sub) {
     const carted = ITEMS.filter(i => S.reactions[i.id] === '🛒').length;
@@ -555,13 +540,13 @@ function pickReaction(r) {
 function checkS1() {
   const carted = ITEMS.filter(i => S.reactions[i.id] === '🛒').length;
 
-  // Update section counter
+  // update section counter
   const cnt = document.getElementById('s1-cart-count');
   if (cnt) cnt.textContent = `${carted}/3 carted`;
 
   if (carted === ITEMS.length && !S.step1Done) {
     S.step1Done = true;
-    // Show done state in modal then close after delay
+    // show done state in modal then close after delay
     const inner = document.getElementById('modal-inner');
     if (inner) {
       const doneBanner = document.createElement('div');
@@ -581,8 +566,8 @@ function checkS1() {
   }
 }
 
- // SECTION 2 — SAVINGS POLL
- 
+// section 2 — savings poll
+
 function renderS2() {
   const spends = S.pollVotes.filter(i => POLL_OPTS[i].type === 'spend').length;
   document.getElementById('section-2').innerHTML = `
@@ -663,7 +648,7 @@ function votePoll(id) {
   S.pollTotal++;
   const opt = POLL_OPTS[id];
 
-  // Animate bar
+  // animate bar
   const el = document.getElementById('po-' + id);
   if (el) {
     const pct = opt.type === 'spend' ? 84 : 16;
@@ -682,7 +667,7 @@ function votePoll(id) {
     }
   }
 
-  // Update poll footer
+  // update poll footer
   const tot = document.getElementById('poll-total');
   const ned = document.getElementById('poll-needed');
   if (tot) tot.textContent = S.pollTotal;
@@ -691,7 +676,7 @@ function votePoll(id) {
     ? `${spendsLeft} spending choice${spendsLeft!==1?'s':''} remaining`
     : '✓ All spending choices selected';
 
-  // Alice comment in modal
+  // alice comment in modal
   const zone = document.getElementById('s2-comments');
   if (zone) {
     zone.style.display = 'flex';
@@ -706,12 +691,12 @@ function votePoll(id) {
     else toast('🟢 Bold choice.', opt.comment.replace('— Alice',''), 'warn');
   }
 
-  // Update modal sub header
+  // update modal sub header
   const spends = S.pollVotes.filter(i => POLL_OPTS[i].type === 'spend').length;
   const sub = document.querySelector('.modal-sub');
   if (sub) sub.innerHTML = `Select all 3 <strong>spending</strong> options to complete Step 2 &nbsp;·&nbsp; <strong>${spends}/3</strong> made`;
 
-  // Update section counter
+  // update section counter
   const cnt = document.getElementById('s2-spend-count');
   if (cnt) cnt.textContent = `${spends}/3 choices made`;
 
@@ -741,8 +726,8 @@ function checkS2() {
   }
 }
 
- // SECTION 3 — QUIZ
- 
+// section 3 — quiz
+
 function renderS3() {
   document.getElementById('section-3').innerHTML = `
     <div class="post-card">
@@ -855,20 +840,20 @@ function quizAnswer(qi, oi) {
     return;
   }
 
-  // Correct
+  // correct
   S.quizDone.push(qi);
   toast('🎉 Alice Chen reacted to your answer', opt.fb, 'ok');
   damageHealth(7);
 
-  // Re-render quiz inside modal
+  // re-render quiz inside modal
   const wrap = document.getElementById('quiz-wrap');
   if (wrap) wrap.innerHTML = quizCardsHTML();
 
-  // Update modal counters
+  // update modal counters
   const modalCount = document.getElementById('quiz-modal-count');
   if (modalCount) modalCount.textContent = `${S.quizDone.length}/${QUIZ.length}`;
 
-  // Update section counter
+  // update section counter
   const secCount = document.getElementById('s3-quiz-count');
   if (secCount) secCount.textContent = `${S.quizDone.length}/3 answered`;
 
@@ -897,8 +882,8 @@ function checkS3() {
   }
 }
 
- // SECTION 4 — FINALE
- 
+// section 4 — finale
+
 function renderS4() {
   const rank = S.health < 25 ? 'Financially Obliterated'
              : S.health < 45 ? 'Professionally Broke'
@@ -989,8 +974,8 @@ function resetAll() {
   goToSection(0, true);
 }
 
- // SIDEBARS
- 
+// sidebars
+
 function renderLeft() {
   document.getElementById('left-sidebar').innerHTML = `
     <div class="li-card" style="overflow:visible;">
@@ -1085,8 +1070,8 @@ function pymkClick(i, name, type) {
   toast(type === 'Connect' ? `Connected with ${name}` : `Following ${name}`, 'They have been notified. They seem surprised.', 'ok');
 }
 
- // INIT
- 
+// init
+
 function renderAll() {
   renderLeft();
   renderRight();
@@ -1100,14 +1085,14 @@ function renderAll() {
 function init() {
   renderAll();
 
-  // Set section height from actual container size
+  // set section height from actual container size
   requestAnimationFrame(() => {
     setSectionHeight();
     goToSection(0, true);
     initScroll();
   });
 
-  // Close reaction popup on outside click
+  // close reaction popup on outside click
   document.addEventListener('click', (e) => {
     if (!e.target.closest('#reaction-popup') && !e.target.closest('.react-btn')) {
       document.getElementById('reaction-popup').style.display = 'none';
@@ -1115,7 +1100,7 @@ function init() {
     }
   });
 
-  // Dot clicks already handled via onclick in HTML
+  // dot clicks already handled via onclick in html
 }
 
 document.addEventListener('DOMContentLoaded', init);
